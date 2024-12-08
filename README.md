@@ -3,6 +3,8 @@
 ## Usage
 
 ```jsx
+import { Monoco } from '@monokai/monoco-react'
+
 <Monoco class="block" radius={32} color={'#f00'} border={[2, '#000']}>
   content
 </Monoco>
