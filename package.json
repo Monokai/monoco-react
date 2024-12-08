@@ -1,0 +1,45 @@
+{
+  "name": "@monokai/monoco-react",
+  "version": "0.0.1",
+  "author": "Monokai",
+  "license": "MIT",
+  "description": "Custom (suircle) corners and borders for React components",
+  "keywords": [
+    "corner",
+    "border",
+    "squircle",
+    "svg",
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monokai/monoco-react.git"
+  },
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "files": [
+    "./dist",
+    "./src"
+  ],
+  "scripts": {
+    "dev": "vite --config vite.config.ts",
+    "build": "vite build --config vite.config.ts"
+  },
+  "dependencies": {
+    "@monokai/monoco": "^0.0.10",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vite-plugin-dts": "^4.3.0"
+  }
+}
