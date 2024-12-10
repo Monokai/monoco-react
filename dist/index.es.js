@@ -53,7 +53,7 @@ function Ye() {
         return e.$$typeof === Q ? null : e.displayName || e.name || null;
       if (typeof e == "string") return e;
       switch (e) {
-        case y:
+        case w:
           return "Fragment";
         case h:
           return "Portal";
@@ -70,7 +70,7 @@ function Ye() {
         switch (typeof e.tag == "number" && console.error(
           "Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."
         ), e.$$typeof) {
-          case w:
+          case y:
             return (e.displayName || "Context") + ".Provider";
           case c:
             return (e._context.displayName || "Context") + ".Consumer";
@@ -340,7 +340,7 @@ function Ye() {
       }), Object.freeze && (Object.freeze(e.props), Object.freeze(e)), e;
     }
     function I(e, t, n, b, O, x) {
-      if (typeof e == "string" || typeof e == "function" || e === y || e === f || e === _ || e === v || e === g || e === he || typeof e == "object" && e !== null && (e.$$typeof === k || e.$$typeof === R || e.$$typeof === w || e.$$typeof === c || e.$$typeof === T || e.$$typeof === ce || e.getModuleId !== void 0)) {
+      if (typeof e == "string" || typeof e == "function" || e === w || e === f || e === _ || e === v || e === g || e === he || typeof e == "object" && e !== null && (e.$$typeof === k || e.$$typeof === R || e.$$typeof === y || e.$$typeof === c || e.$$typeof === T || e.$$typeof === ce || e.getModuleId !== void 0)) {
         var s = t.children;
         if (s !== void 0)
           if (b)
@@ -428,10 +428,10 @@ Check the render method of \`` + n + "`."), t || (e = r(e)) && (t = `
 
 Check the top-level render call using <` + e + ">."), t;
     }
-    var p = Me, l = Symbol.for("react.transitional.element"), h = Symbol.for("react.portal"), y = Symbol.for("react.fragment"), _ = Symbol.for("react.strict_mode"), f = Symbol.for("react.profiler"), c = Symbol.for("react.consumer"), w = Symbol.for("react.context"), T = Symbol.for("react.forward_ref"), v = Symbol.for("react.suspense"), g = Symbol.for("react.suspense_list"), R = Symbol.for("react.memo"), k = Symbol.for("react.lazy"), he = Symbol.for("react.offscreen"), J = Symbol.iterator, Q = Symbol.for("react.client.reference"), W = p.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, B = Object.prototype.hasOwnProperty, S = Object.assign, ce = Symbol.for("react.client.reference"), K = Array.isArray, V = 0, q, re, $, D, te, ue, pe;
+    var p = Me, l = Symbol.for("react.transitional.element"), h = Symbol.for("react.portal"), w = Symbol.for("react.fragment"), _ = Symbol.for("react.strict_mode"), f = Symbol.for("react.profiler"), c = Symbol.for("react.consumer"), y = Symbol.for("react.context"), T = Symbol.for("react.forward_ref"), v = Symbol.for("react.suspense"), g = Symbol.for("react.suspense_list"), R = Symbol.for("react.memo"), k = Symbol.for("react.lazy"), he = Symbol.for("react.offscreen"), J = Symbol.iterator, Q = Symbol.for("react.client.reference"), W = p.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, B = Object.prototype.hasOwnProperty, S = Object.assign, ce = Symbol.for("react.client.reference"), K = Array.isArray, V = 0, q, re, $, D, te, ue, pe;
     d.__reactDisabledLog = !0;
     var ge, we, ve = !1, be = new (typeof WeakMap == "function" ? WeakMap : Map)(), je = Symbol.for("react.client.reference"), ye, Re = {}, _e = {}, xe = {};
-    ie.Fragment = y, ie.jsx = function(e, t, n, b, O) {
+    ie.Fragment = w, ie.jsx = function(e, t, n, b, O) {
       return I(e, t, n, !1, b, O);
     }, ie.jsxs = function(e, t, n, b, O) {
       return I(e, t, n, !0, b, O);
@@ -498,28 +498,28 @@ function Ee({ width: r = 0, height: a = 0, smoothing: i = 1, radius: d = 0, offs
   switch (u) {
     case P.Round:
     case P.RoundInverse:
-      p = p = function({ width: l, height: h, radii: y, offsets: _, sweepFlag: f }) {
-        const [c, , , w] = _, [T, v, g, R] = y;
-        return [["M", w + R, c], ["L", l - v + w, c], ["A", v, v, 0, 0, f, l + w, c + v], ["L", l + w, h - g + c], ["A", g, g, 0, 0, f, l - g + w, h + c], ["L", w + R, h + c], ["A", R, R, 0, 0, f, w, h - R + c], ["L", w, c + T], ["A", T, T, 0, 0, f, w + T, c], ["Z"]];
+      p = p = function({ width: l, height: h, radii: w, offsets: _, sweepFlag: f }) {
+        const [c, , , y] = _, [T, v, g, R] = w;
+        return [["M", y + R, c], ["L", l - v + y, c], ["A", v, v, 0, 0, f, l + y, c + v], ["L", l + y, h - g + c], ["A", g, g, 0, 0, f, l - g + y, h + c], ["L", y + R, h + c], ["A", R, R, 0, 0, f, y, h - R + c], ["L", y, c + T], ["A", T, T, 0, 0, f, y + T, c], ["Z"]];
       }({ width: j, height: C, radii: L, offsets: N, sweepFlag: Y });
       break;
     case P.Flat:
-      p = p = function({ width: l, height: h, radii: y, offsets: _ }) {
-        const [f, , , c] = _, [w, T, v, g] = y;
-        return [["M", c + w, f], ["L", l - T + c, f], ["L", l + c, f + T], ["L", l + c, h - v + f], ["L", l - v + c, h + f], ["L", c + g, h + f], ["L", c, h - g + f], ["L", c, f + w], ["Z"]];
+      p = p = function({ width: l, height: h, radii: w, offsets: _ }) {
+        const [f, , , c] = _, [y, T, v, g] = w;
+        return [["M", c + y, f], ["L", l - T + c, f], ["L", l + c, f + T], ["L", l + c, h - v + f], ["L", l - v + c, h + f], ["L", c + g, h + f], ["L", c, h - g + f], ["L", c, f + y], ["Z"]];
       }({ width: j, height: C, radii: L, offsets: N });
       break;
     case P.Inset:
-      p = p = function({ width: l, height: h, radii: y, offsets: _ }) {
-        const [f, , , c] = _, [w, T, v, g] = y;
-        return [["M", c + g, f], ["L", l - T + c, f], ["L", l - T + c, f + T], ["L", l + c, f + T], ["L", l + c, h - v + f], ["L", l - v + c, h - v + f], ["L", l - v + c, h + f], ["L", c + g, h + f], ["L", c + g, h - g + f], ["L", c, h - g + f], ["L", c, f + w], ["L", c + w, f + w], ["L", c + w, f], ["Z"]];
+      p = p = function({ width: l, height: h, radii: w, offsets: _ }) {
+        const [f, , , c] = _, [y, T, v, g] = w;
+        return [["M", c + g, f], ["L", l - T + c, f], ["L", l - T + c, f + T], ["L", l + c, f + T], ["L", l + c, h - v + f], ["L", l - v + c, h - v + f], ["L", l - v + c, h + f], ["L", c + g, h + f], ["L", c + g, h - g + f], ["L", c, h - g + f], ["L", c, f + y], ["L", c + y, f + y], ["L", c + y, f], ["Z"]];
       }({ width: j, height: C, radii: L, offsets: N });
       break;
     case P.Squircle:
     case P.FigmaSquircle:
     default:
-      p = function({ width: l, height: h, smoothing: y, radii: _, offsets: f, preserveSmoothing: c }) {
-        const [w, , , T] = f, [v, g, R, k] = _.map((he) => function(J, Q, W, B) {
+      p = function({ width: l, height: h, smoothing: w, radii: _, offsets: f, preserveSmoothing: c }) {
+        const [y, , , T] = f, [v, g, R, k] = _.map((he) => function(J, Q, W, B) {
           let S = (1 + Q) * J;
           W || (Q = Math.min(Q, B / J - 1), S = Math.min(S, B));
           const ce = 0.5 * Math.PI * (1 - Q), K = Math.sin(ce / 2) * J * 2 ** 0.5, V = 0.25 * Math.PI * Q, q = J * Math.tan(0.25 * (0.5 * Math.PI - ce)) * Math.cos(V), re = q * Math.tan(V);
@@ -529,12 +529,12 @@ function Ee({ width: r = 0, height: a = 0, smoothing: i = 1, radius: d = 0, offs
             $ = Math.min($, ue), D = te - $, S = Math.min(S, B);
           }
           return { a: D, b: $, c: q, d: re, p: S, arcLength: K, radius: J, ab: D + $, bc: $ + q, abc: D + $ + q };
-        }(he, y, c, 0.5 * Math.min(l, h)));
-        return [["M", l - g.p + T, w], ...de(g.radius, [g.a, 0, g.ab, 0, g.abc, g.d], g.arcLength, [1, 1], [g.d, g.c, g.d, g.bc, g.d, g.abc], [g.p, 0]), ["L", l + T, h - R.p + w], ...de(R.radius, [0, R.a, 0, R.ab, -R.d, R.abc], R.arcLength, [-1, 1], [-R.c, R.d, -R.bc, R.d, -R.abc, R.d], [0, R.p]), ["L", k.p + T, h + w], ...de(k.radius, [-k.a, 0, -k.ab, 0, -k.abc, -k.d], k.arcLength, [-1, -1], [-k.d, -k.c, -k.d, -k.bc, -k.d, -k.abc], [-k.p, 0]), ["L", T, v.p + w], ...de(v.radius, [0, -v.a, 0, -v.ab, v.d, -v.abc], v.arcLength, [1, -1], [v.c, -v.d, v.bc, -v.d, v.abc, -v.d], [0, -v.p]), ["Z"]];
+        }(he, w, c, 0.5 * Math.min(l, h)));
+        return [["M", l - g.p + T, y], ...de(g.radius, [g.a, 0, g.ab, 0, g.abc, g.d], g.arcLength, [1, 1], [g.d, g.c, g.d, g.bc, g.d, g.abc], [g.p, 0]), ["L", l + T, h - R.p + y], ...de(R.radius, [0, R.a, 0, R.ab, -R.d, R.abc], R.arcLength, [-1, 1], [-R.c, R.d, -R.bc, R.d, -R.abc, R.d], [0, R.p]), ["L", k.p + T, h + y], ...de(k.radius, [-k.a, 0, -k.ab, 0, -k.abc, -k.d], k.arcLength, [-1, -1], [-k.d, -k.c, -k.d, -k.bc, -k.d, -k.abc], [-k.p, 0]), ["L", T, v.p + y], ...de(v.radius, [0, -v.a, 0, -v.ab, v.d, -v.abc], v.arcLength, [1, -1], [v.c, -v.d, v.bc, -v.d, v.abc, -v.d], [0, -v.p]), ["Z"]];
       }({ width: j, height: C, smoothing: i, radii: L, offsets: N, preserveSmoothing: A });
   }
   return p = p.filter((l) => l[0]).map(([l, ...h]) => {
-    const y = h.map((f) => Number.isFinite(f) ? Number(f.toFixed(m)) : f), _ = [l, E ? y : y.join(" ")];
+    const w = h.map((f) => Number.isFinite(f) ? Number(f.toFixed(m)) : f), _ = [l, E ? w : w.join(" ")];
     return E ? _ : _.join("");
   }), E ? p : p.join("");
 }
@@ -553,14 +553,14 @@ function ze(r, a) {
         let p = 0;
         const l = [];
         for (let h = 0; h < C.length; h++) {
-          const [y, _] = C[h], f = Y === 0 ? 2 * (p + y) : y;
-          l.push(`<path d="${Ee({ ...m, offset: Y === 0 ? A : H.map((c) => c + p + 0.5 * y) })}" fill="none" stroke="${_}" stroke-width="${f}" />`), p += y;
+          const [w, _] = C[h], f = Y === 0 ? 2 * (p + w) : w;
+          w && (l.push(`<path d="${Ee({ ...m, offset: Y === 0 ? A : H.map((c) => c + p + 0.5 * w) })}" fill="none" stroke="${_}" stroke-width="${f}" />`), p += w);
         }
         N && (F ? j.push(`<rect width="${Z}" height="${I}" fill="${N}" />`) : j.push(`<path d="${L}" fill="${N}" />`)), j.push(...l.reverse());
       }
       return j.length ? ((p, l, h = "c") => {
-        return `url('data:image/svg+xml,${((_) => encodeURIComponent(_).replace(/%20/g, " ").replace(/%3D/g, "=").replace(/%3A/g, ":").replace(/%2F/g, "/").replace(/%2C/g, ",").replace(/%3B/g, ";"))((y = (l ? [`<defs><clipPath id="${h}"><path d="${l}" /></clipPath></defs>`, `<g clip-path="url(#${h})">${p.join("")}</g>`] : p).join(""), `<svg xmlns="http://www.w3.org/2000/svg">${y}</svg>`))}')`;
-        var y;
+        return `url('data:image/svg+xml,${((_) => encodeURIComponent(_).replace(/%20/g, " ").replace(/%3D/g, "=").replace(/%3A/g, ":").replace(/%2F/g, "/").replace(/%2C/g, ",").replace(/%3B/g, ";"))((w = (l ? [`<defs><clipPath id="${h}"><path d="${l}" /></clipPath></defs>`, `<g clip-path="url(#${h})">${p.join("")}</g>`] : p).join(""), `<svg xmlns="http://www.w3.org/2000/svg">${w}</svg>`))}')`;
+        var w;
       })(j, L, X) : "none";
     }(u));
   };
@@ -612,14 +612,14 @@ const Je = Ne(
       clip: I,
       observe: j,
       onResize: C
-    }, y = $e((_) => {
+    }, w = $e((_) => {
       l(_), _ && ze(_, h), typeof L == "function" ? L(_) : L && (L.current = _);
     }, []);
     return Te(() => {
       p && Ue(p, h);
     }, [...Object.values(h)]), Te(() => () => {
       p && Fe(p);
-    }, []), /* @__PURE__ */ qe.jsx(r, { ...H, ref: y, children: a });
+    }, []), /* @__PURE__ */ qe.jsx(r, { ...H, ref: w, children: a });
   }
 );
 export {
