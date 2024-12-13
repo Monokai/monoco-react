@@ -1,5 +1,7 @@
 # Monoco for React
 
+Try all options in the [interactive demo](https://monokai.github.io/monoco-demo)
+
 ## Installation
 
 ```sh
