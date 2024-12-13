@@ -1,5 +1,11 @@
 # Monoco for React
 
+## Installation
+
+```sh
+npm install @monokai/monoco-react
+```
+
 ## Usage
 
 ```jsx
