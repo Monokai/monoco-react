@@ -1,53 +1,64 @@
 import React, {
 	forwardRef,
 	ReactElement,
-	DetailedHTMLProps,
-	ReactNode,
-	HTMLAttributes,
 	useCallback,
 	useEffect,
-	useState
+	useState,
+	type ComponentPropsWithRef,
+	type ElementType,
+	type JSX,
+	type JSXElementConstructor,
+	type Ref
 } from 'react'
 import type { CornerOptions } from '@monokai/monoco'
 import { addCorners, draw, unobserve } from '@monokai/monoco'
 
-type Props = {
-  children: ReactNode,
-  as?: React.ElementType
-} & CornerOptions & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+type IntrinsicAttributes<E extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> =
+	JSX.LibraryManagedAttributes<E, ComponentPropsWithRef<E>>;
 
-export const Monoco =  forwardRef<unknown, Props>(
-	({
-		as: Component = 'div',
-		children,
+export interface MonocoOwnProps<E extends ElementType = ElementType> extends CornerOptions {
+	as?: E
+	children?: ReactElement | string
+};
 
-		width,
-		height,
-		smoothing,
-		radius,
-		offset,
-		type,
-		precision,
-		isRounded,
-		background,
-		border,
-		strokeDrawType,
-		clipID,
-		clip,
-		observe,
-		onResize,
+export type MonocoProps<E extends ElementType> = MonocoOwnProps<E> & Omit<IntrinsicAttributes<E>, keyof MonocoOwnProps>;
 
-		...rest
-	}, forwardedRef):ReactElement => {
-		const [element, setElement] = useState<HTMLElement | undefined>(undefined)
+export const Monoco = forwardRef(
+	(
+		{
+			as: Element = 'div',
+			children,
+
+			width,
+			height,
+			smoothing,
+			borderRadius,
+			offset,
+			cornerType,
+			precision,
+			isRounded,
+			background,
+			border,
+			strokeDrawType,
+			clipID,
+			clip,
+			observe,
+			onResize,
+
+			...rest
+		}: MonocoOwnProps,
+		ref: Ref<Element>
+	) => {
+		// const Component = as || 'div'
+		const [element, setElement] = useState<HTMLElement | null>(null)
 
 		const options:CornerOptions = {
 			width,
 			height,
 			smoothing,
-			radius,
+			borderRadius,
 			offset,
-			type,
+			cornerType,
 			precision,
 			isRounded,
 			background,
@@ -66,12 +77,6 @@ export const Monoco =  forwardRef<unknown, Props>(
 			if (element) {
 				// when element is available, add corners
 				addCorners(element, options)
-			}
-
-			if (typeof forwardedRef === "function") {
-				forwardedRef(element);
-			} else if (forwardedRef) {
-				forwardedRef.current = element;
 			}
 		}, []);
 
@@ -94,11 +99,11 @@ export const Monoco =  forwardRef<unknown, Props>(
 		}, [])
 
 		return (
-			<Component {...rest} ref={refElement}>
+			<Element {...rest} ref={refElement}>
 				{children}
-			</Component>
+			</Element>
 		)
 	}
-)
+) as <E extends ElementType = "div">(props: MonocoProps<E>) => JSX.Element;
 
 export default Monoco
