@@ -18,6 +18,38 @@
 			margin: 2rem;
 		}
 
+		/*.block2 {
+			display: none;
+			width: auto;
+			height: auto;
+			overflow: hidden;
+
+			&.active {
+				display: flex;
+				width: 8rem;
+				height: 8rem;
+			}
+		}*/
+
+		.menu {
+			.block2 {
+				background: blue;
+				width: 0;
+				height: 0;
+/*				transition: all 1s;*/
+
+				&[data-state=closed] {
+					opacity: 0;
+				}
+
+				&[data-state=open] {
+					width: 8rem;
+					height: 8rem;
+					opacity: 1;
+				}
+			}
+		}
+
 		.input-field {
 			font-size: 2rem;
 			padding: 1rem 2rem;

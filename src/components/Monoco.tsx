@@ -1,6 +1,6 @@
 import React, {
 	forwardRef,
-	ReactElement,
+	ReactNode,
 	useCallback,
 	useEffect,
 	useState,
@@ -10,18 +10,19 @@ import React, {
 	type JSXElementConstructor,
 	type Ref
 } from 'react'
+
 import type { CornerOptions } from '@monokai/monoco'
 import { addCorners, draw, unobserve } from '@monokai/monoco'
 
 type IntrinsicAttributes<E extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> =
-	JSX.LibraryManagedAttributes<E, ComponentPropsWithRef<E>>;
+	JSX.LibraryManagedAttributes<E, ComponentPropsWithRef<E>>
 
 export interface MonocoOwnProps<E extends ElementType = ElementType> extends CornerOptions {
 	as?: E
-	children?: ReactElement | string
-};
+	children?: ReactNode
+}
 
-export type MonocoProps<E extends ElementType> = MonocoOwnProps<E> & Omit<IntrinsicAttributes<E>, keyof MonocoOwnProps>;
+export type MonocoProps<E extends ElementType> = MonocoOwnProps<E> & Omit<IntrinsicAttributes<E>, keyof MonocoOwnProps>
 
 export const Monoco = forwardRef(
 	(
@@ -47,7 +48,7 @@ export const Monoco = forwardRef(
 
 			...rest
 		}: MonocoOwnProps,
-		ref: Ref<Element>
+		forwardedRef: Ref<Element>
 	) => {
 		// const Component = as || 'div'
 		const [element, setElement] = useState<HTMLElement | null>(null)
@@ -78,7 +79,13 @@ export const Monoco = forwardRef(
 				// when element is available, add corners
 				addCorners(element, options)
 			}
-		}, []);
+
+			if (typeof forwardedRef === 'function') {
+				forwardedRef(element);
+			} else if (forwardedRef) {
+				forwardedRef.current = element;
+			}
+		}, [])
 
 		useEffect(() => {
 			// when options change, redraw element
@@ -104,6 +111,6 @@ export const Monoco = forwardRef(
 			</Element>
 		)
 	}
-) as <E extends ElementType = "div">(props: MonocoProps<E>) => JSX.Element;
+) as <E extends ElementType = "div">(props: MonocoProps<E>) => JSX.Element
 
 export default Monoco
