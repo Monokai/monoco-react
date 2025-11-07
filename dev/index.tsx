@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import type { CornerOptions } from '@monokai/monoco';
 import { Monoco } from '../src';
 import InputField from './InputField';
-import { Menu } from '@ark-ui/react/menu'
+// import { Menu } from '@ark-ui/react/menu'
 
 const rootElement = document.getElementById('app');
 
@@ -32,11 +32,9 @@ const App = () => {
 		console.log(isActive)
 	}
 
-	function onToggleClass() {
-		setClass(!hasClass)
-
-		console.log(hasClass)
-	}
+	// function onToggleClass() {
+	// 	setClass(!hasClass)
+	// }
 
 	const ref = useRef(null)
 	const ref2 = useRef(null)
@@ -53,11 +51,12 @@ const App = () => {
 			</div>
 			<button onClick={onClick}>increase</button>
 			<button onClick={onToggle}>toggle</button>
-			<button onClick={() => setClass(!hasClass)}>toggle class</button>
-			<Monoco ref={ref} background={bgColor} precision={4} className="block" {...options as CornerOptions}>
+			{/*<button onClick={onToggleClass}>toggle class</button>*/}
+			<Monoco className="block input-field" as="input" type="textarea" {...options as CornerOptions} placeholder={"type something"} />
+			<Monoco background={bgColor} precision={4} className="block" {...options as CornerOptions}>
 				<div>monoco</div>
 			</Monoco>
-			<nav className="menu">
+			{/*<nav className="menu">
 				{children.map((child, i) => (
 					<Menu.Root key={i} positioning={{gutter: 10}}>
 						<Menu.Trigger>
@@ -72,16 +71,14 @@ const App = () => {
 								smoothing={1}
 								onResize={() => console.log('resize')}
 							>
-							{/*<Menu.Content className="block2">*/}
 								<Menu.Item key="1"><div>hoi</div></Menu.Item>
 								<Menu.Item key="2"><div>hai</div></Menu.Item>
 								<Menu.Item key="3"><div>hallo</div></Menu.Item>
 							</Monoco>
-							{/*</Menu.Content>*/}
 						</Menu.Positioner>
 					</Menu.Root>
 				))}
-			</nav>
+			</nav>*/}
 		</div>
 	)
 };

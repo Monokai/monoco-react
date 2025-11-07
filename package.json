@@ -1,6 +1,6 @@
 {
   "name": "@monokai/monoco-react",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": "Monokai",
   "license": "MIT",
   "description": "Custom (suircle) corners and borders for React components",
@@ -28,19 +28,22 @@
     "build": "vite build --config vite.config.ts"
   },
   "dependencies": {
-    "@ark-ui/react": "^4.8.1",
-    "@monokai/monoco": "^0.2.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@monokai/monoco": "^0.2.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.6",
-    "@types/react": "^19.0.7",
-    "@types/react-dom": "^19.0.3",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.7.3",
-    "vite": "^6.0.7",
-    "vite-plugin-dts": "^4.5.0"
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2",
+    "vite-plugin-dts": "^4.5.4"
   }
 }

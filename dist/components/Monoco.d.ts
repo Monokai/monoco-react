@@ -1,10 +1,13 @@
-import { ReactNode, ComponentPropsWithRef, ElementType, JSX, JSXElementConstructor } from 'react';
+import { default as React, ReactNode, ComponentPropsWithRef, ElementType } from 'react';
 import { CornerOptions } from '@monokai/monoco';
-type IntrinsicAttributes<E extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> = JSX.LibraryManagedAttributes<E, ComponentPropsWithRef<E>>;
-export interface MonocoOwnProps<E extends ElementType = ElementType> extends CornerOptions {
-    as?: E;
+export interface MonocoOwnProps extends CornerOptions {
     children?: ReactNode;
 }
-export type MonocoProps<E extends ElementType> = MonocoOwnProps<E> & Omit<IntrinsicAttributes<E>, keyof MonocoOwnProps>;
-export declare const Monoco: <E extends ElementType = "div">(props: MonocoProps<E>) => JSX.Element;
-export default Monoco;
+type AsProp<C extends ElementType> = {
+    as?: C;
+};
+type PolymorphicComponentProp<C extends ElementType> = AsProp<C> & Omit<ComponentPropsWithRef<C>, keyof AsProp<C> | keyof MonocoOwnProps>;
+export type MonocoProps<C extends ElementType = 'div'> = MonocoOwnProps & PolymorphicComponentProp<C>;
+type PolymorphicForwardRefComponent<DefaultElementType extends ElementType = 'div'> = <C extends ElementType = DefaultElementType>(props: MonocoProps<C>) => React.ReactElement | null;
+export declare const Monoco: PolymorphicForwardRefComponent;
+export {};

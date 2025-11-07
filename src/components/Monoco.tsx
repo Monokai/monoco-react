@@ -5,31 +5,44 @@ import React, {
 	useEffect,
 	useState,
 	type ComponentPropsWithRef,
-	type ElementType,
-	type JSX,
-	type JSXElementConstructor,
-	type Ref
+	type ElementType
 } from 'react'
 
 import type { CornerOptions } from '@monokai/monoco'
 import { addCorners, draw, unobserve } from '@monokai/monoco'
 
-type IntrinsicAttributes<E extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> =
-	JSX.LibraryManagedAttributes<E, ComponentPropsWithRef<E>>
-
-export interface MonocoOwnProps<E extends ElementType = ElementType> extends CornerOptions {
-	as?: E
+// Own props specific to the Monoco component
+export interface MonocoOwnProps extends CornerOptions {
 	children?: ReactNode
 }
 
-export type MonocoProps<E extends ElementType> = MonocoOwnProps<E> & Omit<IntrinsicAttributes<E>, keyof MonocoOwnProps>
+// Polymorphic component types - allows for proper type checking based on the 'as' prop
+type AsProp<C extends ElementType> = {
+	as?: C
+}
 
+// Props that depend on the component type specified in 'as'
+// Ensure MonocoOwnProps take precedence by omitting any conflicting HTML attributes
+type PolymorphicComponentProp<C extends ElementType> = AsProp<C> & 
+	Omit<ComponentPropsWithRef<C>, keyof AsProp<C> | keyof MonocoOwnProps>
+
+// Final props type combining own props and polymorphic props
+export type MonocoProps<C extends ElementType = 'div'> = 
+	MonocoOwnProps & PolymorphicComponentProp<C>
+
+// Create a type for the polymorphic ref component
+type PolymorphicForwardRefComponent<
+	DefaultElementType extends ElementType = 'div'
+> = <C extends ElementType = DefaultElementType>(
+	props: MonocoProps<C>
+) => React.ReactElement | null
+
+// Create the component implementation
 export const Monoco = forwardRef(
 	(
 		{
-			as: Element = 'div',
+			as,
 			children,
-
 			width,
 			height,
 			smoothing,
@@ -45,15 +58,14 @@ export const Monoco = forwardRef(
 			clip,
 			observe,
 			onResize,
-
 			...rest
-		}: MonocoOwnProps,
-		forwardedRef: Ref<Element>
+		}: MonocoProps<any>,
+		forwardedRef
 	) => {
-		// const Component = as || 'div'
+		const Element = as || 'div'
 		const [element, setElement] = useState<HTMLElement | null>(null)
 
-		const options:CornerOptions = {
+		const options: CornerOptions = {
 			width,
 			height,
 			smoothing,
@@ -71,34 +83,53 @@ export const Monoco = forwardRef(
 			onResize
 		}
 
-		const refElement = useCallback((element: HTMLElement) => {
-			// store reference for unobserving this later
-			setElement(element);
+		const refElement = useCallback((elementNode: HTMLElement) => {
+			// Only update if the element has changed to avoid unnecessary re-renders
+			if (elementNode !== element) {
+				// store reference for unobserving this later
+				setElement(elementNode)
 
-			if (element) {
-				// when element is available, add corners
-				addCorners(element, options)
-			}
+				if (elementNode) {
+					// when element is available, add corners
+					addCorners(elementNode, options)
+				}
 
-			if (typeof forwardedRef === 'function') {
-				forwardedRef(element);
-			} else if (forwardedRef) {
-				forwardedRef.current = element;
+				// Forward the ref
+				if (typeof forwardedRef === 'function') {
+					forwardedRef(elementNode)
+				} else if (forwardedRef) {
+					forwardedRef.current = elementNode
+				}
 			}
 		}, [])
 
 		useEffect(() => {
 			// when options change, redraw element
-
 			if (element) {
 				draw(element, options)
 			}
-		}, [...Object.values(options)])
+		}, [
+			element,
+			width,
+			height,
+			smoothing,
+			borderRadius,
+			offset,
+			cornerType,
+			precision,
+			isRounded,
+			background,
+			border,
+			strokeDrawType,
+			clipID,
+			clip,
+			observe,
+			onResize
+		])
 
 		useEffect(() => {
 			return () => {
 				// when element is unmounted, unobserve it
-
 				if (element) {
 					unobserve(element)
 				}
@@ -111,6 +142,4 @@ export const Monoco = forwardRef(
 			</Element>
 		)
 	}
-) as <E extends ElementType = "div">(props: MonocoProps<E>) => JSX.Element
-
-export default Monoco
+) as PolymorphicForwardRefComponent
