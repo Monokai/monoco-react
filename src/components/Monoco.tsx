@@ -54,7 +54,7 @@ export const Monoco = forwardRef(
 			background,
 			border,
 			strokeDrawType,
-			clipID,
+			idPrefix,
 			clip,
 			observe,
 			onResize,
@@ -77,7 +77,7 @@ export const Monoco = forwardRef(
 			background,
 			border,
 			strokeDrawType,
-			clipID,
+			idPrefix,
 			clip,
 			observe,
 			onResize
@@ -121,7 +121,7 @@ export const Monoco = forwardRef(
 			background,
 			border,
 			strokeDrawType,
-			clipID,
+			idPrefix,
 			clip,
 			observe,
 			onResize
