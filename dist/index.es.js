@@ -128,7 +128,7 @@ function ce() {
     }
     function f() {
       var e = r(this.type);
-      return X[e] || (X[e] = !0, console.error(
+      return B[e] || (B[e] = !0, console.error(
         "Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."
       )), e = this.props.ref, e !== void 0 ? e : null;
     }
@@ -227,7 +227,7 @@ React keys must be passed directly to JSX without using spread:
         return e();
       }
     };
-    var V, X = {}, B = A.react_stack_bottom_frame.bind(
+    var V, B = {}, X = A.react_stack_bottom_frame.bind(
       A,
       n
     )(), Q = U(o(n)), Z = {};
@@ -238,7 +238,7 @@ React keys must be passed directly to JSX without using spread:
         l,
         k,
         !1,
-        P ? Error("react-stack-top-frame") : B,
+        P ? Error("react-stack-top-frame") : X,
         P ? U(o(e)) : Q
       );
     }, D.jsxs = function(e, l, k) {
@@ -248,7 +248,7 @@ React keys must be passed directly to JSX without using spread:
         l,
         k,
         !0,
-        P ? Error("react-stack-top-frame") : B,
+        P ? Error("react-stack-top-frame") : X,
         P ? U(o(e)) : Q
       );
     };
@@ -268,20 +268,20 @@ var he = fe(), F = new class {
     this.elements = null, this.observer = null;
   }
   onElementResize(r) {
-    this.queue.push(...r), this.rafID || (this.rafID = requestAnimationFrame((() => this.flushQueue())));
+    this.queue.push(...r), this.rafID || (this.rafID = requestAnimationFrame(() => this.flushQueue()));
   }
   flushQueue() {
     const r = /* @__PURE__ */ new Map();
     for (const s of this.queue) r.set(s.target, s);
-    this.queue = [], r.forEach(((s, t) => {
+    this.queue = [], r.forEach((s, t) => {
       if (!t.isConnected) return void this.unobserve(t);
       const o = this.elements?.get(t);
       if (!o) return;
-      let { width: a, height: n } = s.contentRect;
+      let { inlineSize: a, blockSize: n } = s.borderBoxSize[0];
       o.cornerOptions.isRounded && (a = Math.round(a), n = Math.round(n));
       const { previousW: m, previousH: v, draw: f, onResize: c } = o;
       m === a && v === n || (f?.({ width: a, height: n }), c?.({ width: a, height: n }, s.target), o.previousW = a, o.previousH = n);
-    })), this.rafID = null;
+    }), this.rafID = null;
   }
   getDrawOptions = (r) => this.elements?.get(r)?.cornerOptions ?? null;
   setCornerOptions(r, s) {
@@ -289,7 +289,7 @@ var he = fe(), F = new class {
     t && (t.cornerOptions = s, this.elements?.set(r, t));
   }
   addElement(r, s, t) {
-    this.elements || (this.elements = /* @__PURE__ */ new Map()), this.observer || (this.observer = new ResizeObserver(((n) => this.onElementResize(n)))), this.unobserve(r);
+    this.elements || (this.elements = /* @__PURE__ */ new Map()), this.observer || (this.observer = new ResizeObserver((n) => this.onElementResize(n))), this.unobserve(r);
     const { observe: o = !0, onResize: a } = s;
     return o && (this.elements.set(r, { draw: t, cornerOptions: s, onResize: a, previousW: null, previousH: null, element: r }), this.observer.observe(r)), t;
   }
@@ -309,18 +309,18 @@ var he = fe(), F = new class {
     const s = (t) => {
       this.observer?.unobserve(t), this.elements?.delete(t);
     };
-    r ? s(r) : this.elements?.keys().forEach(((t) => s(t)));
+    r ? s(r) : this.elements?.keys().forEach((t) => s(t));
   }
 }();
-function q(r, s, t, o, a, n, m, v) {
+function z(r, s, t, o, a, n, m, v) {
   if (t) {
     const f = [];
-    return r && f.push(["c", ...o]), a && f.push(["a", t, t, 0, 0, s, ...n.map(((c) => c * a))]), r && f.push(["c", ...m]), f;
+    return r && f.push(["c", ...o]), a && f.push(["a", t, t, 0, 0, s, ...n.map((c) => c * a)]), r && f.push(["c", ...m]), f;
   }
   return [["l", ...v]];
 }
 const de = ({ width: r, height: s, radii: t, offsets: o, smoothing: a = 1, preserveSmoothing: n = !0, sweepFlag: m = 1 }) => {
-  const [v, , , f] = o, [c, h, _, R] = t.map(((A) => (function(b, y, g, d) {
+  const [v, , , f] = o, [c, h, _, R] = t.map((A) => (function(b, y, g, d) {
     let E = (1 + y) * b;
     g || (y = Math.min(y, d / b - 1), E = Math.min(E, d));
     const w = 0.5 * Math.PI * (1 - y), u = Math.sin(w / 2) * b * 2 ** 0.5, i = 0.25 * Math.PI * y, T = b * Math.tan(0.25 * (0.5 * Math.PI - w)) * Math.cos(i), $ = T * Math.tan(i);
@@ -330,8 +330,8 @@ const de = ({ width: r, height: s, radii: t, offsets: o, smoothing: a = 1, prese
       p = Math.min(p, M), x = S - p, E = Math.min(E, d);
     }
     return { a: x, b: p, c: T, d: $, p: E, arcLength: u, radius: b, ab: x + p, bc: p + T, abc: x + p + T };
-  })(A, a, n, Math.max(A, 0.5 * Math.min(r, s)))));
-  return [["M", r - h.p + f, v], ...q(a, m, h.radius, [h.a, 0, h.ab, 0, h.abc, h.d], h.arcLength, [1, 1], [h.d, h.c, h.d, h.bc, h.d, h.abc], [h.p, 0]), ["L", r + f, s - _.p + v], ...q(a, m, _.radius, [0, _.a, 0, _.ab, -_.d, _.abc], _.arcLength, [-1, 1], [-_.c, _.d, -_.bc, _.d, -_.abc, _.d], [0, _.p]), ["L", R.p + f, s + v], ...q(a, m, R.radius, [-R.a, 0, -R.ab, 0, -R.abc, -R.d], R.arcLength, [-1, -1], [-R.d, -R.c, -R.d, -R.bc, -R.d, -R.abc], [-R.p, 0]), ["L", f, c.p + v], ...q(a, m, c.radius, [0, -c.a, 0, -c.ab, c.d, -c.abc], c.arcLength, [1, -1], [c.c, -c.d, c.bc, -c.d, c.abc, -c.d], [0, -c.p]), ["Z"]];
+  })(A, a, n, Math.max(A, 0.5 * Math.min(r, s))));
+  return [["M", r - h.p + f, v], ...z(a, m, h.radius, [h.a, 0, h.ab, 0, h.abc, h.d], h.arcLength, [1, 1], [h.d, h.c, h.d, h.bc, h.d, h.abc], [h.p, 0]), ["L", r + f, s - _.p + v], ...z(a, m, _.radius, [0, _.a, 0, _.ab, -_.d, _.abc], _.arcLength, [-1, 1], [-_.c, _.d, -_.bc, _.d, -_.abc, _.d], [0, _.p]), ["L", R.p + f, s + v], ...z(a, m, R.radius, [-R.a, 0, -R.ab, 0, -R.abc, -R.d], R.arcLength, [-1, -1], [-R.d, -R.c, -R.d, -R.bc, -R.d, -R.abc], [-R.p, 0]), ["L", f, c.p + v], ...z(a, m, c.radius, [0, -c.a, 0, -c.ab, c.d, -c.abc], c.arcLength, [1, -1], [c.c, -c.d, c.bc, -c.d, c.abc, -c.d], [0, -c.p]), ["Z"]];
 }, J = (r) => {
   const s = 10 ** r;
   return (t) => Math.round(t * s) / s;
@@ -339,7 +339,7 @@ const de = ({ width: r, height: s, radii: t, offsets: o, smoothing: a = 1, prese
 function pe({ id: r, angle: s, colors: t, precision: o }) {
   const a = J(o), n = s * (Math.PI / 180), m = Math.sin(n), v = -Math.cos(n), f = (m >= 0 ? 1 : 0) - 0.5, c = (v >= 0 ? 1 : 0) - 0.5, h = Math.abs(f * m + c * v);
   return `<linearGradient id="${r}" x1="${a(0.5 - h * m)}" y1="${a(0.5 - h * v)}"  x2="${a(0.5 + h * m)}" y2="${a(0.5 + h * v)}" gradientUnits="objectBoundingBox">${(function(_, R) {
-    const A = J(R), b = _.map(((d) => {
+    const A = J(R), b = _.map((d) => {
       const E = d.trim().split(/\s+/), w = E[0];
       let u = null;
       if (E.length > 1) {
@@ -347,7 +347,7 @@ function pe({ id: r, angle: s, colors: t, precision: o }) {
         u = i.includes("%") ? parseFloat(i) / 100 : parseFloat(i);
       }
       return { color: w, val: u };
-    })), y = b.length;
+    }), y = b.length;
     b[0].val === null && (b[0].val = 0), b[y - 1].val === null && (b[y - 1].val = 1);
     let g = 0;
     for (; g < y - 1; ) {
@@ -359,21 +359,21 @@ function pe({ id: r, angle: s, colors: t, precision: o }) {
       }
       g = d;
     }
-    return b.map(((d) => `<stop offset="${A(d.val)}" stop-color="${d.color}" />`)).join("");
+    return b.map((d) => `<stop offset="${A(d.val)}" stop-color="${d.color}" />`).join("");
   })(t, o)}</linearGradient>`;
 }
 const me = /[\r\n"%#()<>?[\\\]^`{|}\s']/g, ne = { "\r": "", "\n": "" };
-function z({ width: r = 0, height: s = 0, borderRadius: t = 0, offset: o = 0, smoothing: a = 1, cornerType: n = de, precision: m = 3, isArray: v = !1 }) {
+function q({ width: r = 0, height: s = 0, borderRadius: t = 0, offset: o = 0, smoothing: a = 1, cornerType: n = de, precision: m = 3, isArray: v = !1 }) {
   if (!r || !s) return v ? [] : "";
   const f = Array.isArray(o) ? o : [o, o, o, o], [c, h, _, R] = f, A = r - R - h, b = s - c - _;
   let y, g;
   if (Array.isArray(t)) {
-    const w = t.map(((i, T) => i + t[(T + 1) % 4])), u = Math.min(...w.map(((i, T) => (T % 2 == 0 ? A : b) / i)));
-    y = u < 1 ? t.map(((i) => i * u)) : t;
-  } else y = [t, t, t, t].map(((w, u) => Math.max(0, Math.min(w - f[u], 0.5 * Math.min(A, b)))));
+    const w = t.map((i, T) => i + t[(T + 1) % 4]), u = Math.min(...w.map((i, T) => (T % 2 == 0 ? A : b) / i));
+    y = u < 1 ? t.map((i) => i * u) : t;
+  } else y = [t, t, t, t].map((w, u) => Math.max(0, Math.min(w - f[u], 0.5 * Math.min(A, b))));
   g = n ? n({ width: A, height: b, radii: y, offsets: f, smoothing: a }) : [[]];
   const d = J(m);
-  if (v) return g.filter(((w) => w[0])).map((([w, ...u]) => [w, ...u.map(((i) => typeof i == "number" ? d(i) : i))]));
+  if (v) return g.filter((w) => w[0]).map(([w, ...u]) => [w, ...u.map((i) => typeof i == "number" ? d(i) : i)]);
   let E = "";
   for (let w = 0; w < g.length; w++) {
     const u = g[w];
@@ -391,8 +391,8 @@ function ve(r, s) {
   F.setCornerOptions(r, s);
   const t = (o) => {
     const a = F.getDrawOptions(r) ?? {}, n = { ...a, ...o };
-    n.isRounded && (n.width = n.width ? Math.round(n.width) : void 0, n.height = n.height ? Math.round(n.height) : void 0), n.width && n.height && (r.style.clipPath = a.clip ? `path('${z(n)}')` : "", (a.background || a.border) && (r.style.backgroundImage = (function(m) {
-      const { border: v = [], offset: f = 0, strokeDrawType: c = 0, background: h, clip: _, idPrefix: R = "m", width: A, height: b, precision: y = 3 } = m, g = [], d = Array.isArray(v?.[0]) ? v : [v], E = Array.isArray(f) ? f : [f, f, f, f], w = _ ? null : z(m);
+    n.isRounded && (n.width = n.width ? Math.round(n.width) : void 0, n.height = n.height ? Math.round(n.height) : void 0), n.width && n.height && (r.style.clipPath = a.clip ? `path('${q(n)}')` : "", (a.background || a.border) && (r.style.backgroundImage = (function(m) {
+      const { border: v = [], offset: f = 0, strokeDrawType: c = 0, background: h, clip: _, idPrefix: R = "m", width: A, height: b, precision: y = 3 } = m, g = [], d = Array.isArray(v?.[0]) ? v : [v], E = Array.isArray(f) ? f : [f, f, f, f], w = _ ? null : q(m);
       let u;
       if (d?.length) {
         let i = 0;
@@ -403,22 +403,22 @@ function ve(r, s) {
             const M = `${R}g${$}`;
             u || (u = []), u.push(pe({ id: M, angle: x, colors: S, precision: y }));
             const j = c === 0 ? 2 * (i + p) : p;
-            T.push(`<path d="${z({ ...m, offset: c === 0 ? f : E.map(((C) => C + i + 0.5 * p)) })}" fill="none" stroke="url(#${M})" stroke-width="${j}" />`), i += p;
+            T.push(`<path d="${q({ ...m, offset: c === 0 ? f : E.map((C) => C + i + 0.5 * p) })}" fill="none" stroke="url(#${M})" stroke-width="${j}" />`), i += p;
           }
         } else {
           const [p, x] = d[$];
           if (p) {
             const S = c === 0 ? 2 * (i + p) : p;
-            T.push(`<path d="${z({ ...m, offset: c === 0 ? f : E.map(((M) => M + i + 0.5 * p)) })}" fill="none" stroke="${x}" stroke-width="${S}" />`), i += p;
+            T.push(`<path d="${q({ ...m, offset: c === 0 ? f : E.map((M) => M + i + 0.5 * p) })}" fill="none" stroke="${x}" stroke-width="${S}" />`), i += p;
           }
         }
         h && (_ ? g.push(`<rect width="${A}" height="${b}" fill="${h}" />`) : g.push(`<path d="${w}" fill="${h}" />`)), g.push(...T.reverse());
       }
       return g.length ? (({ paths: i, gradients: T, clipPath: $, idPrefix: p }) => {
         const x = `${p}c`, S = [], M = [];
-        return T && T.forEach(((C) => {
+        return T && T.forEach((C) => {
           S.push(C);
-        })), $ && S.push(`<clipPath id="${x}"><path d="${$}" /></clipPath>`), S.length && M.push(`<defs>${S.join("")}</defs>`), $ ? M.push(`<g clip-path="url(#${x})">${i.join("")}</g>`) : M.push(...i), `url('data:image/svg+xml,${((C) => C.replace(me, ((N) => ne[N] ?? (ne[N] = `%${N.charCodeAt(0).toString(16).toUpperCase()}`))))((j = M.join(""), `<svg xmlns="http://www.w3.org/2000/svg">${j}</svg>`))}')`;
+        }), $ && S.push(`<clipPath id="${x}"><path d="${$}" /></clipPath>`), S.length && M.push(`<defs>${S.join("")}</defs>`), $ ? M.push(`<g clip-path="url(#${x})">${i.join("")}</g>`) : M.push(...i), `url('data:image/svg+xml,${((C) => C.replace(me, (N) => ne[N] ?? (ne[N] = `%${N.charCodeAt(0).toString(16).toUpperCase()}`)))((j = M.join(""), `<svg xmlns="http://www.w3.org/2000/svg">${j}</svg>`))}')`;
         var j;
       })({ paths: g, clipPath: w, gradients: u, idPrefix: R }) : "none";
     })(n)));
