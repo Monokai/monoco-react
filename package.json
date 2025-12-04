@@ -1,6 +1,6 @@
 {
   "name": "@monokai/monoco-react",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Monokai",
   "license": "MIT",
   "description": "Custom (suircle) corners and borders for React components",
